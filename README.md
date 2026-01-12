@@ -6,8 +6,6 @@
 
 一个基于原生 JavaScript 和 HTML5 Canvas 的交互式几何教学工具，支持多种 2D 几何图形的可视化学习、辅助线绘制和几何测量。
 
-![Geometry Learning Screenshot](https://via.placeholder.com/800x450?text=Geometry+Learning+Screenshot)
-
 > 我写这个的目的是因为为了给孩子教学使用，后来我发现一个问题，人和人之间的差距，真的比人和猴子的差距还要大
 
 ## 功能特性
