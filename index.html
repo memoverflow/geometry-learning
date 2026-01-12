@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="交互式几何教学工具 - 支持2D图形的可视化学习">
+    <title>几何教学工具</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 加载动画 */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- 主应用容器 -->
+    <div class="app-container">
+        <!-- 左侧边栏 - 形状分类导航 -->
+        <aside id="sidebar">
+            <!-- 由 app.js 动态生成 -->
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 工具栏 -->
+            <header id="toolbar">
+                <!-- 由 app.js 动态生成 -->
+            </header>
+
+            <!-- 画布和信息面板 -->
+            <div class="canvas-wrapper">
+                <!-- 画布容器 -->
+                <div class="canvas-container">
+                    <canvas id="geometryCanvas" width="800" height="600"></canvas>
+                </div>
+
+                <!-- 右侧信息面板 -->
+                <aside class="info-panel-container">
+                    <div id="infoPanel">
+                        <!-- 由 app.js 动态生成 -->
+                    </div>
+
+                    <!-- 显示选项 -->
+                    <div class="display-options">
+                        <h4>显示选项</h4>
+                        <div class="display-option">
+                            <input type="checkbox" id="showAngles" data-option="angles" checked>
+                            <label for="showAngles">显示角度</label>
+                        </div>
+                        <div class="display-option">
+                            <input type="checkbox" id="showSides" data-option="sides" checked>
+                            <label for="showSides">显示边长</label>
+                        </div>
+                        <div class="display-option">
+                            <input type="checkbox" id="showDiagonals" data-option="diagonals">
+                            <label for="showDiagonals">显示对角线</label>
+                        </div>
+                        <div class="display-option">
+                            <input type="checkbox" id="showGrid" data-option="grid" checked>
+                            <label for="showGrid">显示网格</label>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <!-- 加载应用模块 -->
+    <script type="module">
+        import { GeometryApp } from './js/app.js';
+
+        // 隐藏加载动画
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 500);
+        });
+    </script>
+
+    <!-- 兼容性检查 -->
+    <script>
+        // 检查浏览器是否支持 ES6 模块
+        if (!('noModule' in HTMLScriptElement.prototype)) {
+            document.body.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #f8fafc; text-align: center; padding: 40px;">
+                    <div>
+                        <h1 style="color: #ef4444; margin-bottom: 20px;">浏览器不兼容</h1>
+                        <p style="color: #64748b; font-size: 16px;">请使用现代浏览器（Chrome、Firefox、Safari、Edge）访问此页面。</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+{
+  "presets": {
+    "2d": {
+      "triangles": {
+        "equilateral": {
+          "name": "等边三角形",
+          "description": "三条边都相等，三个角都是60°",
+          "formula": {
+            "area": "S = (√3/4) × a²",
+            "perimeter": "C = 3a"
+          }
+        },
+        "isosceles": {
+          "name": "等腰三角形",
+          "description": "两条边相等，两个底角相等",
+          "formula": {
+            "area": "S = (1/2) × 底 × 高",
+            "perimeter": "C = 2a + b"
+          }
+        },
+        "right": {
+          "name": "直角三角形",
+          "description": "有一个角是90°，满足勾股定理",
+          "formula": {
+            "area": "S = (1/2) × a × b",
+            "pythagorean": "a² + b² = c²"
+          }
+        }
+      },
+      "quadrilaterals": {
+        "square": {
+          "name": "正方形",
+          "description": "四条边相等，四个角都是90°",
+          "formula": {
+            "area": "S = a²",
+            "perimeter": "C = 4a",
+            "diagonal": "d = a√2"
+          }
+        },
+        "rectangle": {
+          "name": "矩形",
+          "description": "对边相等，四个角都是90°",
+          "formula": {
+            "area": "S = a × b",
+            "perimeter": "C = 2(a + b)",
+            "diagonal": "d = √(a² + b²)"
+          }
+        },
+        "parallelogram": {
+          "name": "平行四边形",
+          "description": "两组对边分别平行且相等",
+          "formula": {
+            "area": "S = 底 × 高",
+            "perimeter": "C = 2(a + b)"
+          }
+        },
+        "rhombus": {
+          "name": "菱形",
+          "description": "四条边都相等的平行四边形",
+          "formula": {
+            "area": "S = (1/2) × d₁ × d₂",
+            "perimeter": "C = 4a"
+          }
+        },
+        "trapezoid": {
+          "name": "梯形",
+          "description": "有且只有一组对边平行",
+          "formula": {
+            "area": "S = (1/2)(a + b) × h",
+            "perimeter": "C = a + b + c + d"
+          }
+        },
+        "kite": {
+          "name": "筝形",
+          "description": "有两组邻边分别相等",
+          "formula": {
+            "area": "S = (1/2) × d₁ × d₂"
+          }
+        }
+      },
+      "circles": {
+        "circle": {
+          "name": "圆",
+          "description": "平面上到定点距离等于定长的点的集合",
+          "formula": {
+            "area": "S = πr²",
+            "perimeter": "C = 2πr",
+            "diameter": "d = 2r"
+          }
+        },
+        "sector": {
+          "name": "扇形",
+          "description": "由两条半径和一段弧围成的图形",
+          "formula": {
+            "area": "S = (θ/360°) × πr²",
+            "arc_length": "l = (θ/360°) × 2πr"
+          }
+        }
+      },
+      "polygons": {
+        "regular": {
+          "name": "正多边形",
+          "description": "各边相等，各角也相等的多边形",
+          "formula": {
+            "interior_angle": "α = (n-2) × 180° / n",
+            "exterior_angle": "β = 360° / n",
+            "area": "S = (1/4) × n × a² × cot(π/n)"
+          }
+        }
+      }
+    },
+    "3d": {
+      "prisms": {
+        "cube": {
+          "name": "正方体",
+          "description": "六个面都是正方形的立体图形",
+          "formula": {
+            "volume": "V = a³",
+            "surface_area": "S = 6a²",
+            "diagonal": "d = a√3"
+          }
+        },
+        "cuboid": {
+          "name": "长方体",
+          "description": "六个面都是矩形的立体图形",
+          "formula": {
+            "volume": "V = a × b × c",
+            "surface_area": "S = 2(ab + bc + ca)",
+            "diagonal": "d = √(a² + b² + c²)"
+          }
+        },
+        "triangular_prism": {
+          "name": "三棱柱",
+          "description": "底面为三角形的棱柱",
+          "formula": {
+            "volume": "V = S底 × h",
+            "surface_area": "S = 2S底 + S侧"
+          }
+        }
+      },
+      "pyramids": {
+        "triangular_pyramid": {
+          "name": "三棱锥",
+          "description": "底面为三角形的棱锥",
+          "formula": {
+            "volume": "V = (1/3) × S底 × h"
+          }
+        },
+        "square_pyramid": {
+          "name": "四棱锥",
+          "description": "底面为正方形的棱锥",
+          "formula": {
+            "volume": "V = (1/3) × a² × h"
+          }
+        }
+      },
+      "round_solids": {
+        "cylinder": {
+          "name": "圆柱",
+          "description": "由两个平行圆面和一个曲面组成",
+          "formula": {
+            "volume": "V = πr²h",
+            "surface_area": "S = 2πr² + 2πrh",
+            "lateral_area": "S侧 = 2πrh"
+          }
+        },
+        "cone": {
+          "name": "圆锥",
+          "description": "由一个圆面和一个曲面组成",
+          "formula": {
+            "volume": "V = (1/3)πr²h",
+            "surface_area": "S = πr² + πrl",
+            "slant_height": "l = √(r² + h²)"
+          }
+        },
+        "sphere": {
+          "name": "球",
+          "description": "空间中到定点距离等于定长的点的集合",
+          "formula": {
+            "volume": "V = (4/3)πr³",
+            "surface_area": "S = 4πr²"
+          }
+        }
+      }
+    }
+  },
+  "teaching": {
+    "elementary": {
+      "grade_1_2": [
+        "point",
+        "segment",
+        "triangle-any",
+        "square",
+        "rectangle",
+        "circle"
+      ],
+      "grade_3_4": [
+        "triangle-isosceles",
+        "triangle-equilateral",
+        "parallelogram",
+        "rhombus",
+        "trapezoid"
+      ],
+      "grade_5_6": [
+        "triangle-right",
+        "pentagon",
+        "hexagon",
+        "sector",
+        "cube",
+        "cuboid"
+      ]
+    },
+    "middle_school": {
+      "grade_7": [
+        "straightLine",
+        "ray",
+        "kite",
+        "cylinder",
+        "cone"
+      ],
+      "grade_8": [
+        "quadrilateral-any",
+        "triangular-prism",
+        "triangular-pyramid",
+        "square-pyramid"
+      ],
+      "grade_9": [
+        "sphere",
+        "hexagonal-prism"
+      ]
+    },
+    "high_school": {
+      "required": [
+        "all"
+      ],
+      "elective": [
+        "custom_polygon",
+        "transformations"
+      ]
+    }
+  },
+  "colors": {
+    "themes": {
+      "default": {
+        "primary": "#667eea",
+        "secondary": "#764ba2",
+        "fill": "rgba(102, 126, 234, 0.2)",
+        "stroke": "#667eea",
+        "point": "#764ba2"
+      },
+      "ocean": {
+        "primary": "#0077b6",
+        "secondary": "#00b4d8",
+        "fill": "rgba(0, 119, 182, 0.2)",
+        "stroke": "#0077b6",
+        "point": "#00b4d8"
+      },
+      "forest": {
+        "primary": "#2d6a4f",
+        "secondary": "#40916c",
+        "fill": "rgba(45, 106, 79, 0.2)",
+        "stroke": "#2d6a4f",
+        "point": "#40916c"
+      },
+      "sunset": {
+        "primary": "#f77f00",
+        "secondary": "#d62828",
+        "fill": "rgba(247, 127, 0, 0.2)",
+        "stroke": "#f77f00",
+        "point": "#d62828"
+      }
+    }
+  }
+}

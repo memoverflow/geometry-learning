@@ -1,0 +1,787 @@
+/**
+ * 几何教学工具样式
+ */
+
+/* ============================================================================
+   CSS 变量
+   ============================================================================ */
+:root {
+    /* 主色调 */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --primary-dark: #5a67d8;
+    --secondary-color: #764ba2;
+
+    /* 功能色 */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
+
+    /* 中性色 */
+    --bg-color: #f8fafc;
+    --sidebar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    /* 阴影 */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* 尺寸 */
+    --sidebar-width: 280px;
+    --toolbar-height: 60px;
+    --info-panel-width: 300px;
+
+    /* 动画 */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+
+    /* 圆角 */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+}
+
+/* ============================================================================
+   基础样式
+   ============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background: var(--bg-color);
+    overflow: hidden;
+}
+
+/* ============================================================================
+   布局
+   ============================================================================ */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================================
+   侧边栏
+   ============================================================================ */
+#sidebar {
+    width: var(--sidebar-width);
+    height: 100%;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.sidebar-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+}
+
+.category {
+    margin-bottom: 4px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    user-select: none;
+}
+
+.category-header:hover {
+    background-color: #f1f5f9;
+}
+
+.category-header.expanded {
+    background-color: #f1f5f9;
+}
+
+.category-icon {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.category-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.category-arrow {
+    font-size: 10px;
+    color: var(--text-muted);
+    transition: transform var(--transition-fast);
+}
+
+.category-items {
+    display: none;
+    padding-left: 20px;
+}
+
+.category-items.expanded {
+    display: block;
+}
+
+.shape-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px 10px 30px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.shape-item:hover {
+    background-color: #f8fafc;
+    border-left-color: var(--primary-color);
+}
+
+.shape-item.active {
+    background-color: #eff6ff;
+    border-left-color: var(--primary-color);
+}
+
+.shape-item.active .shape-name {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.shape-name {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.shape-type-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.shape-type-badge.2d {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* ============================================================================
+   主内容区
+   ============================================================================ */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ============================================================================
+   工具栏
+   ============================================================================ */
+#toolbar {
+    height: var(--toolbar-height);
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 12px;
+    border-right: 1px solid var(--border-color);
+}
+
+.toolbar-group:last-child {
+    border-right: none;
+}
+
+.tool-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 56px;
+}
+
+.tool-btn:hover {
+    background-color: #f1f5f9;
+}
+
+.tool-btn.active {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.tool-btn.active .tool-icon,
+.tool-btn.active .tool-label {
+    color: white;
+}
+
+.tool-icon {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.tool-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* 辅助线工具栏组 - 特殊样式，因为按钮较多 */
+.toolbar-group.auxiliary-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+    padding: 0 8px;
+    overflow-x: auto;
+    max-width: none;
+}
+
+.toolbar-group.auxiliary-group .tool-btn {
+    padding: 4px 8px;
+    min-width: 40px;
+    flex-shrink: 0;
+}
+
+.toolbar-group.auxiliary-group .tool-icon {
+    font-size: 14px;
+    margin-bottom: 1px;
+}
+
+.toolbar-group.auxiliary-group .tool-label {
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+/* 禁用的工具按钮样式 */
+.tool-btn:disabled,
+.tool-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.tool-btn:disabled:hover,
+.tool-btn.disabled:hover {
+    background: transparent;
+}
+
+/* 清除数据按钮 - 危险操作样式 */
+.tool-btn.danger:hover {
+    background-color: #fef2f2;
+    color: var(--danger-color);
+}
+
+.tool-btn.danger:hover .tool-icon,
+.tool-btn.danger:hover .tool-label {
+    color: var(--danger-color);
+}
+
+/* ============================================================================
+   画布容器
+   ============================================================================ */
+.canvas-wrapper {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.canvas-container {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    overflow: hidden;
+}
+
+#geometryCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================================
+   信息面板
+   ============================================================================ */
+.info-panel-container {
+    width: var(--info-panel-width);
+    background: var(--card-bg);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+#infoPanel {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.info-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.info-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.info-description {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary-color);
+}
+
+.info-properties {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.property {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: var(--radius-md);
+}
+
+.property.small {
+    padding: 8px 12px;
+    background: #f8fafc;
+}
+
+.property-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.property-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.property.small .property-value {
+    font-size: 14px;
+}
+
+.property-group {
+    margin-top: 8px;
+}
+
+.property-group-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.no-shape {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px 20px;
+}
+
+/* ============================================================================
+   公式区域
+   ============================================================================ */
+.info-formulas {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: var(--radius-md);
+    border-left: 4px solid #f59e0b;
+}
+
+.formula-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #92400e;
+    margin-bottom: 12px;
+}
+
+.formula-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(146, 64, 14, 0.2);
+}
+
+.formula-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.formula-name {
+    font-size: 12px;
+    color: #92400e;
+    font-weight: 500;
+}
+
+.formula-value {
+    font-size: 13px;
+    color: #78350f;
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+}
+
+/* ============================================================================
+   操作提示
+   ============================================================================ */
+.operation-hint {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--radius-lg);
+    font-size: 13px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+.operation-hint.show {
+    opacity: 1;
+}
+
+/* ============================================================================
+   帮助面板
+   ============================================================================ */
+.help-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    z-index: 2000;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: none;
+}
+
+.help-panel.show {
+    display: block;
+}
+
+.help-panel h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.help-section {
+    margin-bottom: 20px;
+}
+
+.help-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.help-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+.help-key {
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: var(--text-primary);
+}
+
+.help-desc {
+    color: var(--text-secondary);
+}
+
+.help-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.help-overlay.show {
+    display: block;
+}
+
+/* ============================================================================
+   显示选项
+   ============================================================================ */
+.display-options {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+    background: #fafafa;
+}
+
+.display-options h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.display-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.display-option:last-child {
+    margin-bottom: 0;
+}
+
+.display-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    accent-color: var(--primary-color);
+}
+
+.display-option label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+/* ============================================================================
+   测量结果提示
+   ============================================================================ */
+.measure-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card-bg);
+    padding: 12px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    font-size: 16px;
+    color: var(--text-primary);
+    opacity: 0;
+    transition: all var(--transition-normal);
+    z-index: 1000;
+}
+
+.measure-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.measure-toast strong {
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+/* ============================================================================
+   滚动条样式
+   ============================================================================ */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ============================================================================
+   响应式设计
+   ============================================================================ */
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: 240px;
+        --info-panel-width: 260px;
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --sidebar-width: 220px;
+        --info-panel-width: 240px;
+    }
+
+    .toolbar-group {
+        padding: 0 8px;
+    }
+
+    .tool-btn {
+        padding: 6px 8px;
+        min-width: 48px;
+    }
+
+    .tool-label {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .info-panel-container {
+        display: none;
+    }
+
+    .canvas-wrapper {
+        flex-direction: column;
+    }
+
+    #toolbar {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 8px;
+    }
+
+    .toolbar-group {
+        border-right: none;
+        padding: 4px;
+    }
+}
+
+/* ============================================================================
+   动画
+   ============================================================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.shape-item.active {
+    animation: fadeIn var(--transition-fast);
+}
+
+.tool-btn.active {
+    animation: pulse 0.3s ease;
+}
+
+/* ============================================================================
+   打印样式
+   ============================================================================ */
+@media print {
+    #sidebar,
+    #toolbar,
+    .info-panel-container {
+        display: none;
+    }
+
+    .canvas-container {
+        width: 100%;
+        height: 100vh;
+    }
+}
